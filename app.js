@@ -13,7 +13,7 @@ const port = 3000;
 const cors = require("cors");
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: "https://lyric-finderr.vercel.app/",
   })
 );
 
