@@ -11,9 +11,22 @@ const app = express();
 const port = 3000;
 
 const cors = require("cors");
+const allowedDomains = [
+  "https://lyric-finderr.vercel.app",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin: "https://lyric-finderr.vercel.app/",
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedDomains.indexOf(origin) === -1) {
+        const msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
   })
 );
 
