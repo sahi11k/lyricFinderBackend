@@ -1,20 +1,26 @@
+require("dotenv").config();
 const express = require("express");
 const { default: axios } = require("axios");
 const {
   SEARCH_URL,
-  API_KEY,
   TOP_TEN_SONGS_URL,
   FETCH_LYRICS_URL,
   FETCH_TRACK_URL,
 } = require("./constant");
 const app = express();
-const port = 3000;
+const port = 8080;
 
 const cors = require("cors");
 const allowedDomains = [
   "https://lyric-finderr.vercel.app",
   "http://localhost:3000",
 ];
+
+const API_KEY = process.env.MUSIX_MATCH_API_KEY;
+
+if (!API_KEY) {
+  console.error("MUSIXMATCH_API_KEY environment variable is not set");
+}
 
 app.use(
   cors({
